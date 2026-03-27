@@ -1,3 +1,26 @@
 <resources>
     <string name="app_name">Weather App</string>
+
+    <!-- Search -->
+    <string name="search_placeholder">Введите город…</string>
+    <string name="search_button_description">Поиск</string>
+
+    <!-- Empty state -->
+    <string name="empty_state_hint">Введите название города</string>
+
+    <!-- Error state -->
+    <string name="error_title">Ошибка</string>
+    <string name="error_unknown">Неизвестная ошибка</string>
+    <string name="error_back_button">Назад</string>
+
+    <!-- Weather stats -->
+    <string name="stat_feels_like">Ощущается</string>
+    <string name="stat_humidity">Влажность</string>
+    <string name="stat_wind">Ветер</string>
+    <string name="stat_sunrise">Рассвет</string>
+    <string name="stat_sunset">Закат</string>
+
+    <!-- Data source snackbar -->
+    <string name="data_source_server">Данные получены с сервера</string>
+    <string name="data_source_cache">Данные из кэша</string>
 </resources>

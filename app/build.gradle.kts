@@ -1,16 +1,33 @@
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import java.util.Properties
+import kotlin.apply
 
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+
+    alias(libs.plugins.kotlinx.serialization)
+    alias(libs.plugins.devtools.ksp)
+    alias(libs.plugins.hilt.android.plugin)
 }
+
+
+val localProperties = Properties().apply {
+    val localPropertiesFile = rootProject.file("local.properties")
+    if (localPropertiesFile.exists()) {
+        load(localPropertiesFile.inputStream())
+    }
+}
+
+val openWeatherApiKey: String = localProperties.getProperty("OPEN_WEATHER_API_KEY", "").trim('"')
 
 android {
     namespace = "com.github.SlavikJunior.weatherapp"
     compileSdk {
         version = release(36)
     }
+    buildToolsVersion = "36.1.0"
 
     defaultConfig {
         applicationId = "com.github.SlavikJunior.weatherapp"
@@ -20,6 +37,8 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField("String", "OPEN_WEATHER_API_KEY", "\"$openWeatherApiKey\"")
     }
 
     buildTypes {
@@ -42,10 +61,28 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
 }
 
 dependencies {
+    implementation(libs.hilt.android)
+    ksp(libs.hilt.android.compiler)
+    implementation(libs.room)
+    implementation(libs.room.ktx)
+    ksp(libs.room.compiler)
+    implementation(libs.coil)
+    implementation(libs.coilNet)
+    implementation(libs.hilt.navigation)
+//    implementation(libs.navigation3.runtime)
+//    implementation(libs.navigation3.ui)
+
+    implementation(libs.coroutines)
+    implementation(libs.kotlinx.serialization.json)
+    implementation(libs.retrofit.kotlinx.serialization.converter)
+    implementation(libs.retrofit)
+    implementation(libs.kotlin.reflect)
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
