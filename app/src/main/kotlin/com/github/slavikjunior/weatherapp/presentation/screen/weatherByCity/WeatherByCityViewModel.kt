@@ -1,14 +1,12 @@
-package com.github.slavikjunior.weatherapp.presentation.viewmodel
+package com.github.slavikjunior.weatherapp.presentation.screen.weatherByCity
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.github.SlavikJunior.weatherapp.R
 import com.github.slavikjunior.weatherapp.domain.model.DataSource
-import com.github.slavikjunior.weatherapp.domain.model.RawRequest
+import com.github.slavikjunior.weatherapp.domain.model.RawCity
 import com.github.slavikjunior.weatherapp.domain.usecase.GetCurrentWeatherDataByLocationUseCase
-import com.github.slavikjunior.weatherapp.presentation.viewmodel.event.WeatherByCityEvent
-import com.github.slavikjunior.weatherapp.presentation.viewmodel.state.WeatherByCityUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -80,7 +78,7 @@ internal class WeatherByCityViewModel
 
         currentJob = viewModelScope.launch {
             try {
-                val result = getCurrentWeatherDataByLocation(request = RawRequest(city = city))
+                val result = getCurrentWeatherDataByLocation(request = RawCity(city = city))
                 _uiState.update {
                     WeatherByCityUiState.DefaultState(city = city, weatherData = result.data)
                 }

@@ -1,4 +1,4 @@
-package com.github.slavikjunior.weatherapp.presentation.viewmodel.state
+package com.github.slavikjunior.weatherapp.presentation.screen.weatherByCity
 
 import com.github.slavikjunior.weatherapp.domain.model.WeatherData
 

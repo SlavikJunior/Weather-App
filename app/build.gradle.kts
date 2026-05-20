@@ -10,6 +10,8 @@ plugins {
     alias(libs.plugins.kotlinx.serialization)
     alias(libs.plugins.devtools.ksp)
     alias(libs.plugins.hilt.android.plugin)
+    alias(libs.plugins.gms.plugin)
+    alias(libs.plugins.crashlytics.plugin)
 }
 
 
@@ -66,6 +68,11 @@ android {
 }
 
 dependencies {
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.analytics)
+    implementation(libs.firebase.crashlytics)
+    implementation(libs.firebase.messaging)
+
     implementation(libs.hilt.android)
     ksp(libs.hilt.android.compiler)
     implementation(libs.room)
@@ -74,14 +81,16 @@ dependencies {
     implementation(libs.coil)
     implementation(libs.coilNet)
     implementation(libs.hilt.navigation)
-//    implementation(libs.navigation3.runtime)
-//    implementation(libs.navigation3.ui)
+    implementation(libs.navigation3.runtime)
+    implementation(libs.navigation3.ui)
 
     implementation(libs.coroutines)
     implementation(libs.kotlinx.serialization.json)
     implementation(libs.retrofit.kotlinx.serialization.converter)
     implementation(libs.retrofit)
     implementation(libs.kotlin.reflect)
+    implementation(libs.okhttp)
+    implementation(libs.okhttp.logger)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)

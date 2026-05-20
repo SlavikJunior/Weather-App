@@ -17,10 +17,26 @@
     <string name="stat_feels_like">Ощущается</string>
     <string name="stat_humidity">Влажность</string>
     <string name="stat_wind">Ветер</string>
+    <string name="stat_wind_speed">Скорость ветра</string>
     <string name="stat_sunrise">Рассвет</string>
     <string name="stat_sunset">Закат</string>
 
     <!-- Data source snackbar -->
     <string name="data_source_server">Данные получены с сервера</string>
     <string name="data_source_cache">Данные из кэша</string>
+
+    <!-- Actions -->
+    <string name="action_details">Подробнее</string>
+    <string name="action_back">← Назад</string>
+
+    <!-- Onboarding -->
+    <string name="onboarding_title">Weather App</string>
+    <string name="onboarding_welcome">Добро пожаловать! Вот что умеет приложение:</string>
+    <string name="onboarding_dismiss">Понятно!</string>
+    <string-array name="onboarding_features">
+        <item>Получать текущую погоду по названию города</item>
+        <item>Просматривать подробную информацию о погоде</item>
+        <item>Кешировать данные для работы офлайн</item>
+        <item>Получать push-уведомления о погоде</item>
+    </string-array>
 </resources>
