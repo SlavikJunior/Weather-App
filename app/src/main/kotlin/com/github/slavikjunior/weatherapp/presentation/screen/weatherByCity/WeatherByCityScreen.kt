@@ -1,5 +1,6 @@
-package com.github.slavikjunior.weatherapp.presentation.screen
+package com.github.slavikjunior.weatherapp.presentation.screen.weatherByCity
 
+import android.os.Bundle
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
@@ -56,29 +57,40 @@ import com.github.slavikjunior.weatherapp.presentation.ui.theme.GradientBottom
 import com.github.slavikjunior.weatherapp.presentation.ui.theme.GradientTop
 import com.github.slavikjunior.weatherapp.presentation.ui.theme.TextOnGradient
 import com.github.slavikjunior.weatherapp.presentation.ui.theme.TextSecondaryOnGradient
-import com.github.slavikjunior.weatherapp.presentation.viewmodel.WeatherByCityViewModel
-import com.github.slavikjunior.weatherapp.presentation.viewmodel.event.WeatherByCityEvent
-import com.github.slavikjunior.weatherapp.presentation.viewmodel.state.WeatherByCityUiState
+import com.github.slavikjunior.weatherapp.presentation.screen.WeatherScreenDefaults
+import com.google.firebase.analytics.FirebaseAnalytics
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
-private const val ICON_URL_FORMAT = "https://openweathermap.org/img/wn/%s@4x.png"
-private const val TIME_FORMAT = "HH:mm"
+private const val SCREEN_NAME = "WeatherByCity"
+private const val SCREEN_CLASS = "WeatherByCityScreen"
 
 @Composable
 fun WeatherByCity(
-    paddingValues: PaddingValues = PaddingValues()
-) = InnerWeatherByCity(paddingValues = paddingValues)
+    paddingValues: PaddingValues = PaddingValues(),
+    onNavigateToDetail: (String) -> Unit = {}
+) = InnerWeatherByCity(paddingValues = paddingValues, onNavigateToDetail = onNavigateToDetail)
 
 @Composable
 internal fun InnerWeatherByCity(
     paddingValues: PaddingValues = PaddingValues(),
+    onNavigateToDetail: (String) -> Unit = {},
     viewModel: WeatherByCityViewModel = hiltViewModel()
 ) {
     val uiState by viewModel.uiState.collectAsState()
     val snackbarHostState = remember { SnackbarHostState() }
     val context = LocalContext.current
+
+    LaunchedEffect(Unit) {
+        FirebaseAnalytics.getInstance(context).logEvent(
+            FirebaseAnalytics.Event.SCREEN_VIEW,
+            Bundle().apply {
+                putString(FirebaseAnalytics.Param.SCREEN_NAME, SCREEN_NAME)
+                putString(FirebaseAnalytics.Param.SCREEN_CLASS, SCREEN_CLASS)
+            }
+        )
+    }
 
     LaunchedEffect(Unit) {
         viewModel.snackbarMessage.collect { resId ->
@@ -110,7 +122,8 @@ internal fun InnerWeatherByCity(
                 city = state.city,
                 weatherData = state.weatherData,
                 onCityChange = { viewModel.reduce(WeatherByCityEvent.UpdateCurrentCityEvent(it)) },
-                onSearch = { viewModel.reduce(WeatherByCityEvent.GetCurrentWeatherEvent) }
+                onSearch = { viewModel.reduce(WeatherByCityEvent.GetCurrentWeatherEvent) },
+                onNavigateToDetail = { onNavigateToDetail(state.city) }
             )
         }
 
@@ -172,7 +185,8 @@ private fun WeatherContent(
     city: String,
     weatherData: WeatherData?,
     onCityChange: (String) -> Unit,
-    onSearch: () -> Unit
+    onSearch: () -> Unit,
+    onNavigateToDetail: () -> Unit
 ) {
     Column(
         modifier = Modifier
@@ -182,6 +196,14 @@ private fun WeatherContent(
     ) {
         if (weatherData != null) {
             WeatherDisplay(weatherData = weatherData)
+            Spacer(modifier = Modifier.height(16.dp))
+            Button(
+                onClick = onNavigateToDetail,
+                modifier = Modifier.fillMaxWidth(),
+                colors = ButtonDefaults.buttonColors(containerColor = CardBackground)
+            ) {
+                Text(text = stringResource(R.string.action_details), fontSize = 16.sp, color = TextOnGradient)
+            }
         } else {
             Spacer(modifier = Modifier.weight(1f))
             Text(
@@ -216,7 +238,7 @@ private fun WeatherDisplay(weatherData: WeatherData) {
 
         AsyncImage(
             model = ImageRequest.Builder(LocalContext.current)
-                .data(ICON_URL_FORMAT.format(weatherData.icon))
+                .data(WeatherScreenDefaults.ICON_URL_FORMAT.format(weatherData.icon))
                 .crossfade(true)
                 .build(),
             contentDescription = weatherData.description,
@@ -339,5 +361,5 @@ private fun SearchBar(city: String, onCityChange: (String) -> Unit, onSearch: ()
 
 private fun formatUnixTime(unixSeconds: Long): String {
     val date = Date(unixSeconds * 1000)
-    return SimpleDateFormat(TIME_FORMAT, Locale.getDefault()).format(date)
+    return SimpleDateFormat(WeatherScreenDefaults.TIME_FORMAT, Locale.getDefault()).format(date)
 }

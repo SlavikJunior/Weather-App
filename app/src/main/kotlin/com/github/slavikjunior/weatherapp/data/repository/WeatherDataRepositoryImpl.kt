@@ -8,10 +8,10 @@ import com.github.slavikjunior.weatherapp.data.network.request.CurrentWeatherReq
 import com.github.slavikjunior.weatherapp.data.network.request.DirectGeocodingByLocationRequest
 import com.github.slavikjunior.weatherapp.data.network.response.CurrentWeatherResponse
 import com.github.slavikjunior.weatherapp.data.network.service.OpenWeatherApiService
+import com.github.slavikjunior.weatherapp.data.mapper.toDomainModel
 import com.github.slavikjunior.weatherapp.data.utils.toQueryMap
 import com.github.slavikjunior.weatherapp.domain.model.DataSource
 import com.github.slavikjunior.weatherapp.domain.model.LocationData
-import com.github.slavikjunior.weatherapp.domain.model.WeatherData
 import com.github.slavikjunior.weatherapp.domain.model.WeatherResult
 import com.github.slavikjunior.weatherapp.domain.repository.WeatherDataRepository
 import kotlinx.coroutines.CoroutineDispatcher
@@ -75,24 +75,9 @@ internal class WeatherDataRepositoryImpl
         }
     }
 
-    private fun CurrentWeatherResponse.toDomainModel(): WeatherData {
-        val weather = this.weather.firstOrNull()
-        return WeatherData(
-            name = name,
-            description = weather?.description.orEmpty(),
-            icon = weather?.icon.orEmpty(),
-            temp = main.temp.toInt(),
-            feelsLike = main.feelsLike.toInt(),
-            humidity = main.humidity,
-            windSpeed = wind.speed,
-            sunrise = system.sunrise,
-            sunSet = system.sunset
-        )
-    }
-
-    companion object {
-        private const val TAG = "WeatherRepository"
-        private const val CACHE_TTL_SECONDS = 60L
-        private const val CITY_NOT_FOUND_MESSAGE = "Город '%s' не найден"
+    private companion object {
+        const val TAG = "WeatherRepository"
+        const val CACHE_TTL_SECONDS = 60L
+        const val CITY_NOT_FOUND_MESSAGE = "Город '%s' не найден"
     }
 }

@@ -1,4 +1,4 @@
-package com.github.slavikjunior.weatherapp.presentation.viewmodel.event
+package com.github.slavikjunior.weatherapp.presentation.screen.weatherByCity
 
 internal sealed interface WeatherByCityEvent {
 
