@@ -1,0 +1,298 @@
+unstable class com.github.slavikjunior.weatherapp.data.db.WeatherCacheDao_Impl {
+  unstable val __db: RoomDatabase
+  unstable val __insertAdapterOfWeatherCacheEntity: EntityInsertAdapter<WeatherCacheEntity>
+  <runtime stability> = Unstable
+}
+unstable class com.github.slavikjunior.weatherapp.data.db.WeatherDatabase_Impl {
+  unstable val _weatherCacheDao: Lazy<WeatherCacheDao>
+  <runtime stability> = Unstable
+}
+unstable class com.github.slavikjunior.weatherapp.MainActivity {
+  unstable val notificationPermissionLauncher: ActivityResultLauncher<String>
+  <runtime stability> = Unstable
+}
+unstable class com.github.slavikjunior.weatherapp.MessagingService {
+  <runtime stability> = Unstable
+}
+unstable class com.github.slavikjunior.weatherapp.WeatherApplication {
+  <runtime stability> = Unstable
+}
+stable class com.github.slavikjunior.weatherapp.data.db.WeatherCacheEntity {
+  stable val city: String
+  stable val name: String
+  stable val description: String
+  stable val icon: String
+  stable val temp: Int
+  stable val feelsLike: Int
+  stable val humidity: Int
+  stable val windSpeed: Double
+  stable val sunrise: Long
+  stable val sunset: Long
+  stable val cachedAt: Long
+  <runtime stability> = Stable
+}
+unstable class com.github.slavikjunior.weatherapp.data.db.WeatherDatabase {
+  <runtime stability> = Unstable
+}
+stable class com.github.slavikjunior.weatherapp.data.network.interceptor.OpenWeatherApiKeyInterceptor {
+  stable val apiKey: String
+  <runtime stability> = Stable
+}
+unstable class com.github.slavikjunior.weatherapp.data.network.request.CurrentWeatherRequest.$serializer {
+  unstable val descriptor: SerialDescriptor
+  <runtime stability> = Unstable
+}
+stable class com.github.slavikjunior.weatherapp.data.network.request.CurrentWeatherRequest {
+  stable val latitude: Double
+  stable val longitude: Double
+  stable val units: String
+  stable val lang: String
+  <runtime stability> = Stable
+}
+unstable class com.github.slavikjunior.weatherapp.data.network.request.DirectGeocodingByLocationRequest.$serializer {
+  unstable val descriptor: SerialDescriptor
+  <runtime stability> = Unstable
+}
+stable class com.github.slavikjunior.weatherapp.data.network.request.DirectGeocodingByLocationRequest {
+  stable val q: String
+  stable val limit: Int
+  <runtime stability> = Stable
+}
+unstable class com.github.slavikjunior.weatherapp.data.network.response.CurrentWeatherResponse.$serializer {
+  unstable val descriptor: SerialDescriptor
+  <runtime stability> = Unstable
+}
+unstable class com.github.slavikjunior.weatherapp.data.network.response.CurrentWeatherResponse {
+  stable val coordinates: Coordinates
+  unstable val weather: List<Weather>
+  stable val base: String
+  stable val main: Main
+  stable val visibility: Int?
+  stable val wind: Wind
+  stable val clouds: Clouds
+  stable val rain: Rain?
+  stable val snow: Snow?
+  stable val dt: Long
+  stable val system: System
+  stable val timezone: Long
+  stable val id: Int
+  stable val name: String
+  stable val code: Int
+  <runtime stability> = Unstable
+}
+unstable class com.github.slavikjunior.weatherapp.data.network.response.Coordinates.$serializer {
+  unstable val descriptor: SerialDescriptor
+  <runtime stability> = Unstable
+}
+stable class com.github.slavikjunior.weatherapp.data.network.response.Coordinates {
+  stable val latitude: Double
+  stable val longitude: Double
+  <runtime stability> = Stable
+}
+unstable class com.github.slavikjunior.weatherapp.data.network.response.Weather.$serializer {
+  unstable val descriptor: SerialDescriptor
+  <runtime stability> = Unstable
+}
+stable class com.github.slavikjunior.weatherapp.data.network.response.Weather {
+  stable val id: Int
+  stable val main: String
+  stable val description: String
+  stable val icon: String
+  <runtime stability> = Stable
+}
+unstable class com.github.slavikjunior.weatherapp.data.network.response.Main.$serializer {
+  unstable val descriptor: SerialDescriptor
+  <runtime stability> = Unstable
+}
+stable class com.github.slavikjunior.weatherapp.data.network.response.Main {
+  stable val feelsLike: Double
+  stable val grndLevel: Int?
+  stable val humidity: Int
+  stable val pressure: Int
+  stable val seaLevel: Int?
+  stable val temp: Double
+  stable val tempMax: Double
+  stable val tempMin: Double
+  <runtime stability> = Stable
+}
+unstable class com.github.slavikjunior.weatherapp.data.network.response.Wind.$serializer {
+  unstable val descriptor: SerialDescriptor
+  <runtime stability> = Unstable
+}
+stable class com.github.slavikjunior.weatherapp.data.network.response.Wind {
+  stable val speed: Double
+  stable val deg: Int?
+  stable val gust: Double?
+  <runtime stability> = Stable
+}
+unstable class com.github.slavikjunior.weatherapp.data.network.response.Clouds.$serializer {
+  unstable val descriptor: SerialDescriptor
+  <runtime stability> = Unstable
+}
+stable class com.github.slavikjunior.weatherapp.data.network.response.Clouds {
+  stable val all: Int
+  <runtime stability> = Stable
+}
+unstable class com.github.slavikjunior.weatherapp.data.network.response.Rain.$serializer {
+  unstable val descriptor: SerialDescriptor
+  <runtime stability> = Unstable
+}
+stable class com.github.slavikjunior.weatherapp.data.network.response.Rain {
+  stable val perHour: Double?
+  <runtime stability> = Stable
+}
+unstable class com.github.slavikjunior.weatherapp.data.network.response.Snow.$serializer {
+  unstable val descriptor: SerialDescriptor
+  <runtime stability> = Unstable
+}
+stable class com.github.slavikjunior.weatherapp.data.network.response.Snow {
+  stable val perHour: Double?
+  <runtime stability> = Stable
+}
+unstable class com.github.slavikjunior.weatherapp.data.network.response.System.$serializer {
+  unstable val descriptor: SerialDescriptor
+  <runtime stability> = Unstable
+}
+stable class com.github.slavikjunior.weatherapp.data.network.response.System {
+  stable val type: Int?
+  stable val id: Int?
+  stable val country: String?
+  stable val sunrise: Long
+  stable val sunset: Long
+  <runtime stability> = Stable
+}
+unstable class com.github.slavikjunior.weatherapp.data.network.response.DirectGeocodingByLocationResponse.$serializer {
+  unstable val descriptor: SerialDescriptor
+  <runtime stability> = Unstable
+}
+stable class com.github.slavikjunior.weatherapp.data.network.response.DirectGeocodingByLocationResponse {
+  stable val name: String
+  stable val latitude: Double
+  stable val longitude: Double
+  stable val country: String?
+  stable val state: String?
+  <runtime stability> = Stable
+}
+unstable class com.github.slavikjunior.weatherapp.data.repository.WeatherDataRepositoryImpl {
+  runtime val apiService: OpenWeatherApiService
+  unstable val dispatcher: CoroutineDispatcher
+  runtime val cacheDao: WeatherCacheDao
+  <runtime stability> = Unstable
+}
+stable class com.github.slavikjunior.weatherapp.di.NetworkModule {
+  stable val BASE_URL: String
+  stable val DATABASE_NAME: String
+  stable val CONTENT_TYPE: String
+  <runtime stability> = Stable
+}
+stable class com.github.slavikjunior.weatherapp.di.RepositoryModule {
+  <runtime stability> = Stable
+}
+stable class com.github.slavikjunior.weatherapp.domain.model.LocationData {
+  stable val latitude: Double
+  stable val longitude: Double
+  <runtime stability> = Stable
+}
+stable class com.github.slavikjunior.weatherapp.domain.model.WeatherData {
+  stable val name: String
+  stable val description: String
+  stable val icon: String
+  stable val temp: Int
+  stable val feelsLike: Int
+  stable val humidity: Int
+  stable val windSpeed: Double
+  stable val sunrise: Long
+  stable val sunSet: Long
+  <runtime stability> = Stable
+}
+stable class com.github.slavikjunior.weatherapp.domain.model.WeatherResult {
+  stable val data: WeatherData
+  stable val source: DataSource
+  <runtime stability> = Stable
+}
+runtime class com.github.slavikjunior.weatherapp.domain.usecase.GetCurrentWeatherDataByLocationUseCase {
+  runtime val repository: WeatherDataRepository
+  <runtime stability> = Uncertain(WeatherDataRepository)
+}
+runtime class com.github.slavikjunior.weatherapp.domain.usecase.GetDirectGeocodingByLocationUseCase {
+  runtime val repository: WeatherDataRepository
+  <runtime stability> = Uncertain(WeatherDataRepository)
+}
+stable class com.github.slavikjunior.weatherapp.presentation.navigation.Route.WeatherByCityRoute {
+  <runtime stability> = Stable
+}
+unstable class com.github.slavikjunior.weatherapp.presentation.navigation.Route.WeatherDetailRoute.$serializer {
+  unstable val descriptor: SerialDescriptor
+  <runtime stability> = Unstable
+}
+stable class com.github.slavikjunior.weatherapp.presentation.navigation.Route.WeatherDetailRoute {
+  stable val city: String
+  <runtime stability> = Stable
+}
+stable class com.github.slavikjunior.weatherapp.presentation.navigation.Route.RingChartRoute {
+  <runtime stability> = Stable
+}
+stable class com.github.slavikjunior.weatherapp.presentation.screen.WeatherScreenDefaults {
+  stable val ICON_URL_FORMAT: String
+  stable val TIME_FORMAT: String
+  <runtime stability> = Stable
+}
+stable class com.github.slavikjunior.weatherapp.presentation.screen.ringchart.RingChartData {
+  unstable val values: List<Float>
+  unstable val colors: List<Color>
+}
+stable class com.github.slavikjunior.weatherapp.presentation.screen.weatherByCity.WeatherByCityEvent.GetCurrentWeatherEvent {
+  <runtime stability> = Stable
+}
+stable class com.github.slavikjunior.weatherapp.presentation.screen.weatherByCity.WeatherByCityEvent.DismissErrorEvent {
+  <runtime stability> = Stable
+}
+stable class com.github.slavikjunior.weatherapp.presentation.screen.weatherByCity.WeatherByCityEvent.UpdateCurrentCityEvent {
+  stable val city: String
+  <runtime stability> = Stable
+}
+stable class com.github.slavikjunior.weatherapp.presentation.screen.weatherByCity.WeatherByCityUiState.LoadingState {
+  stable val requestedCity: String
+}
+stable class com.github.slavikjunior.weatherapp.presentation.screen.weatherByCity.WeatherByCityUiState.ErrorState {
+  stable val message: String
+  stable val city: String
+}
+stable class com.github.slavikjunior.weatherapp.presentation.screen.weatherByCity.WeatherByCityUiState.DefaultState {
+  stable val city: String
+  stable val weatherData: WeatherData?
+}
+unstable class com.github.slavikjunior.weatherapp.presentation.screen.weatherByCity.WeatherByCityViewModel {
+  unstable val savedStateHandle: SavedStateHandle
+  runtime val getCurrentWeatherDataByLocation: GetCurrentWeatherDataByLocationUseCase
+  unstable val _uiState: MutableStateFlow<WeatherByCityUiState>
+  unstable val uiState: StateFlow<WeatherByCityUiState>
+  unstable val _snackbarMessage: MutableSharedFlow<Int>
+  unstable val snackbarMessage: SharedFlow<Int>
+  unstable var currentJob: Job?
+  <runtime stability> = Unstable
+}
+stable class com.github.slavikjunior.weatherapp.presentation.screen.weatherDetail.WeatherDetailEvent.RetryEvent {
+  <runtime stability> = Stable
+}
+stable class com.github.slavikjunior.weatherapp.presentation.screen.weatherDetail.WeatherDetailEvent.DismissErrorEvent {
+  <runtime stability> = Stable
+}
+stable class com.github.slavikjunior.weatherapp.presentation.screen.weatherDetail.WeatherDetailUiState.LoadingState {
+  stable val requestedCity: String
+}
+stable class com.github.slavikjunior.weatherapp.presentation.screen.weatherDetail.WeatherDetailUiState.ErrorState {
+  stable val message: String
+  stable val city: String
+}
+stable class com.github.slavikjunior.weatherapp.presentation.screen.weatherDetail.WeatherDetailUiState.DefaultState {
+  stable val city: String
+  stable val weatherData: WeatherData?
+}
+unstable class com.github.slavikjunior.weatherapp.presentation.screen.weatherDetail.WeatherDetailViewModel {
+  stable val city: String
+  runtime val getCurrentWeatherDataByLocation: GetCurrentWeatherDataByLocationUseCase
+  unstable val _uiState: MutableStateFlow<WeatherDetailUiState>
+  unstable val uiState: StateFlow<WeatherDetailUiState>
+  <runtime stability> = Unstable
+}

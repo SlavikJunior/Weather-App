@@ -50,7 +50,9 @@ internal class WeatherDetailViewModel @AssistedInject constructor(
                 val result = getCurrentWeatherDataByLocation(RawCity(city = city))
                 _uiState.update { WeatherDetailUiState.DefaultState(city = city, weatherData = result.data) }
             } catch (cause: Throwable) {
-                _uiState.update { WeatherDetailUiState.ErrorState(cause = cause, city = city) }
+                _uiState.update {
+                    WeatherDetailUiState.ErrorState(message = cause.message ?: "", city = city)
+                }
             }
         }
     }

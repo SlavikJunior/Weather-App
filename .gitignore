@@ -17,3 +17,4 @@ local.properties
 .kotlin
 task.txt
 app/google-services.json
+custom_view_ref.png

@@ -26,6 +26,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
@@ -86,7 +87,10 @@ internal fun InnerWeatherDetail(
         )
     }
 
-    val gradient = Brush.verticalGradient(listOf(GradientTop, GradientBottom))
+    val gradient = remember { Brush.verticalGradient(listOf(GradientTop, GradientBottom)) }
+    val onRetry: () -> Unit = remember(viewModel) {
+        { viewModel.reduce(WeatherDetailEvent.RetryEvent) }
+    }
 
     Box(
         modifier = Modifier
@@ -97,8 +101,8 @@ internal fun InnerWeatherDetail(
         when (val state = uiState) {
             is WeatherDetailUiState.LoadingState -> LoadingContent()
             is WeatherDetailUiState.ErrorState -> ErrorContent(
-                message = state.cause.message ?: stringResource(R.string.error_unknown),
-                onRetry = { viewModel.reduce(WeatherDetailEvent.RetryEvent) }
+                message = state.message.ifBlank { stringResource(R.string.error_unknown) },
+                onRetry = onRetry
             )
             is WeatherDetailUiState.DefaultState -> DetailContent(
                 city = state.city,
@@ -206,7 +210,7 @@ private fun WeatherDetailDisplay(weatherData: WeatherData) {
         )
 
         Text(
-            text = "${weatherData.temp}°C",
+            text = stringResource(R.string.format_temperature, weatherData.temp),
             fontSize = 80.sp,
             fontWeight = FontWeight.Thin,
             color = TextOnGradient
@@ -220,11 +224,11 @@ private fun WeatherDetailDisplay(weatherData: WeatherData) {
 
         Spacer(modifier = Modifier.height(32.dp))
 
-        DetailRow(label = stringResource(R.string.stat_feels_like), value = "${weatherData.feelsLike}°C")
+        DetailRow(label = stringResource(R.string.stat_feels_like), value = stringResource(R.string.format_temperature, weatherData.feelsLike))
         Spacer(modifier = Modifier.height(12.dp))
-        DetailRow(label = stringResource(R.string.stat_humidity), value = "${weatherData.humidity}%")
+        DetailRow(label = stringResource(R.string.stat_humidity), value = stringResource(R.string.format_humidity, weatherData.humidity))
         Spacer(modifier = Modifier.height(12.dp))
-        DetailRow(label = stringResource(R.string.stat_wind_speed), value = "${weatherData.windSpeed} м/с")
+        DetailRow(label = stringResource(R.string.stat_wind_speed), value = stringResource(R.string.format_wind_speed, weatherData.windSpeed))
         Spacer(modifier = Modifier.height(24.dp))
 
         Row(

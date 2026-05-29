@@ -1,0 +1,86 @@
+restartable skippable scheme("[androidx.compose.ui.UiComposable]") fun com.github.slavikjunior.weatherapp.WeatherApp(
+  stable paddingValues: PaddingValues? = @static <expression>
+)
+restartable skippable scheme("[androidx.compose.ui.UiComposable]") fun com.github.slavikjunior.weatherapp.presentation.screen.onboarding.OnboardingBottomSheet(
+  stable onDismiss: Function0<Unit>
+)
+restartable skippable scheme("[androidx.compose.ui.UiComposable]") fun com.github.slavikjunior.weatherapp.presentation.screen.ringchart.RingChart(
+  stable data: RingChartData
+  stable modifier: Modifier? = @static <expression>
+)
+restartable skippable scheme("[androidx.compose.ui.UiComposable]") fun com.github.slavikjunior.weatherapp.presentation.screen.ringchart.RingChartScreen(
+  stable paddingValues: PaddingValues? = @static <expression>
+  stable onBack: Function0<Unit>? = @static <expression>
+)
+restartable skippable scheme("[androidx.compose.ui.UiComposable]") fun com.github.slavikjunior.weatherapp.presentation.screen.weatherByCity.WeatherByCity(
+  stable paddingValues: PaddingValues? = @static <expression>
+  stable onNavigateToDetail: Function1<String, Unit>? = @static <expression>
+  stable onNavigateToRingChart: Function0<Unit>? = @static <expression>
+)
+restartable skippable scheme("[androidx.compose.ui.UiComposable]") fun com.github.slavikjunior.weatherapp.presentation.screen.weatherByCity.InnerWeatherByCity(
+  stable paddingValues: PaddingValues? = @static <expression>
+  stable onNavigateToDetail: Function1<String, Unit>? = @static <expression>
+  stable onNavigateToRingChart: Function0<Unit>? = @static <expression>
+  unstable viewModel: WeatherByCityViewModel? = @dynamic <expression>
+)
+restartable skippable scheme("[androidx.compose.ui.UiComposable]") fun com.github.slavikjunior.weatherapp.presentation.screen.weatherByCity.LoadingContent()
+restartable skippable scheme("[androidx.compose.ui.UiComposable]") fun com.github.slavikjunior.weatherapp.presentation.screen.weatherByCity.ErrorContent(
+  stable message: String
+  stable onRetry: Function0<Unit>
+)
+restartable skippable scheme("[androidx.compose.ui.UiComposable]") fun com.github.slavikjunior.weatherapp.presentation.screen.weatherByCity.WeatherContent(
+  stable city: String
+  stable weatherData: WeatherData?
+  stable onCityChange: Function1<String, Unit>
+  stable onSearch: Function0<Unit>
+  stable onNavigateToDetail: Function0<Unit>
+  stable onNavigateToRingChart: Function0<Unit>
+)
+restartable skippable scheme("[androidx.compose.ui.UiComposable]") fun com.github.slavikjunior.weatherapp.presentation.screen.weatherByCity.WeatherDisplay(
+  stable weatherData: WeatherData
+)
+restartable skippable scheme("[androidx.compose.ui.UiComposable]") fun com.github.slavikjunior.weatherapp.presentation.screen.weatherByCity.StatCard(
+  stable label: String
+  stable value: String
+)
+restartable skippable scheme("[androidx.compose.ui.UiComposable]") fun com.github.slavikjunior.weatherapp.presentation.screen.weatherByCity.SearchBar(
+  stable city: String
+  stable onCityChange: Function1<String, Unit>
+  stable onSearch: Function0<Unit>
+)
+restartable skippable scheme("[androidx.compose.ui.UiComposable]") fun com.github.slavikjunior.weatherapp.presentation.screen.weatherDetail.WeatherDetail(
+  stable paddingValues: PaddingValues? = @static <expression>
+  stable city: String
+  stable onBack: Function0<Unit>? = @static <expression>
+)
+restartable skippable scheme("[androidx.compose.ui.UiComposable]") fun com.github.slavikjunior.weatherapp.presentation.screen.weatherDetail.InnerWeatherDetail(
+  stable paddingValues: PaddingValues? = @static <expression>
+  stable city: String
+  stable onBack: Function0<Unit>? = @static <expression>
+  unstable viewModel: WeatherDetailViewModel? = @dynamic <expression>
+)
+restartable skippable scheme("[androidx.compose.ui.UiComposable]") fun com.github.slavikjunior.weatherapp.presentation.screen.weatherDetail.LoadingContent()
+restartable skippable scheme("[androidx.compose.ui.UiComposable]") fun com.github.slavikjunior.weatherapp.presentation.screen.weatherDetail.ErrorContent(
+  stable message: String
+  stable onRetry: Function0<Unit>
+)
+restartable skippable scheme("[androidx.compose.ui.UiComposable]") fun com.github.slavikjunior.weatherapp.presentation.screen.weatherDetail.DetailContent(
+  stable city: String
+  stable weatherData: WeatherData?
+  stable onBack: Function0<Unit>
+)
+restartable skippable scheme("[androidx.compose.ui.UiComposable]") fun com.github.slavikjunior.weatherapp.presentation.screen.weatherDetail.WeatherDetailDisplay(
+  stable weatherData: WeatherData
+)
+restartable skippable scheme("[androidx.compose.ui.UiComposable]") fun com.github.slavikjunior.weatherapp.presentation.screen.weatherDetail.DetailRow(
+  stable label: String
+  stable value: String
+)
+restartable skippable scheme("[androidx.compose.ui.UiComposable]") fun com.github.slavikjunior.weatherapp.presentation.screen.weatherDetail.SunCard(
+  stable label: String
+  stable value: String
+)
+restartable skippable scheme("[0, [0]]") fun com.github.slavikjunior.weatherapp.presentation.ui.theme.WeatherAppTheme(
+  stable darkTheme: Boolean = @dynamic <expression>
+  stable content: Function2<Composer, Int, Unit>
+)

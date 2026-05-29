@@ -11,4 +11,7 @@ sealed interface Route: NavKey {
 
     @Serializable
     data class WeatherDetailRoute(val city: String) : Route
+
+    @Serializable
+    data object RingChartRoute : Route
 }
