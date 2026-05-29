@@ -69,13 +69,19 @@ private const val SCREEN_CLASS = "WeatherByCityScreen"
 @Composable
 fun WeatherByCity(
     paddingValues: PaddingValues = PaddingValues(),
-    onNavigateToDetail: (String) -> Unit = {}
-) = InnerWeatherByCity(paddingValues = paddingValues, onNavigateToDetail = onNavigateToDetail)
+    onNavigateToDetail: (String) -> Unit = {},
+    onNavigateToRingChart: () -> Unit = {}
+) = InnerWeatherByCity(
+    paddingValues = paddingValues,
+    onNavigateToDetail = onNavigateToDetail,
+    onNavigateToRingChart = onNavigateToRingChart
+)
 
 @Composable
 internal fun InnerWeatherByCity(
     paddingValues: PaddingValues = PaddingValues(),
     onNavigateToDetail: (String) -> Unit = {},
+    onNavigateToRingChart: () -> Unit = {},
     viewModel: WeatherByCityViewModel = hiltViewModel()
 ) {
     val uiState by viewModel.uiState.collectAsState()
@@ -102,7 +108,16 @@ internal fun InnerWeatherByCity(
         }
     }
 
-    val gradient = Brush.verticalGradient(listOf(GradientTop, GradientBottom))
+    val gradient = remember { Brush.verticalGradient(listOf(GradientTop, GradientBottom)) }
+    val onCityChange: (String) -> Unit = remember(viewModel) {
+        { city -> viewModel.reduce(WeatherByCityEvent.UpdateCurrentCityEvent(city)) }
+    }
+    val onSearch: () -> Unit = remember(viewModel) {
+        { viewModel.reduce(WeatherByCityEvent.GetCurrentWeatherEvent) }
+    }
+    val onDismissError: () -> Unit = remember(viewModel) {
+        { viewModel.reduce(WeatherByCityEvent.DismissErrorEvent) }
+    }
 
     Box(
         modifier = Modifier
@@ -114,16 +129,19 @@ internal fun InnerWeatherByCity(
             is WeatherByCityUiState.LoadingState -> LoadingContent()
 
             is WeatherByCityUiState.ErrorState -> ErrorContent(
-                message = state.cause.message ?: stringResource(R.string.error_unknown),
-                onRetry = { viewModel.reduce(WeatherByCityEvent.DismissErrorEvent) }
+                message = state.message.ifBlank { stringResource(R.string.error_unknown) },
+                onRetry = onDismissError
             )
 
             is WeatherByCityUiState.DefaultState -> WeatherContent(
                 city = state.city,
                 weatherData = state.weatherData,
-                onCityChange = { viewModel.reduce(WeatherByCityEvent.UpdateCurrentCityEvent(it)) },
-                onSearch = { viewModel.reduce(WeatherByCityEvent.GetCurrentWeatherEvent) },
-                onNavigateToDetail = { onNavigateToDetail(state.city) }
+                onCityChange = onCityChange,
+                onSearch = onSearch,
+                onNavigateToDetail = remember(state.city, onNavigateToDetail) {
+                    { onNavigateToDetail(state.city) }
+                },
+                onNavigateToRingChart = onNavigateToRingChart
             )
         }
 
@@ -186,7 +204,8 @@ private fun WeatherContent(
     weatherData: WeatherData?,
     onCityChange: (String) -> Unit,
     onSearch: () -> Unit,
-    onNavigateToDetail: () -> Unit
+    onNavigateToDetail: () -> Unit,
+    onNavigateToRingChart: () -> Unit
 ) {
     Column(
         modifier = Modifier
@@ -216,6 +235,14 @@ private fun WeatherContent(
 
         Spacer(modifier = Modifier.height(24.dp))
         SearchBar(city = city, onCityChange = onCityChange, onSearch = onSearch)
+        Spacer(modifier = Modifier.height(12.dp))
+        Button(
+            onClick = onNavigateToRingChart,
+            modifier = Modifier.fillMaxWidth(),
+            colors = ButtonDefaults.buttonColors(containerColor = CardBackground)
+        ) {
+            Text(text = stringResource(R.string.ring_chart_label), fontSize = 14.sp, color = TextOnGradient)
+        }
     }
 }
 
@@ -246,7 +273,7 @@ private fun WeatherDisplay(weatherData: WeatherData) {
         )
 
         Text(
-            text = "${weatherData.temp}°C",
+            text = stringResource(R.string.format_temperature, weatherData.temp),
             fontSize = 72.sp,
             fontWeight = FontWeight.Thin,
             color = TextOnGradient
@@ -266,15 +293,15 @@ private fun WeatherDisplay(weatherData: WeatherData) {
         ) {
             StatCard(
                 label = stringResource(R.string.stat_feels_like),
-                value = "${weatherData.feelsLike}°C"
+                value = stringResource(R.string.format_temperature, weatherData.feelsLike)
             )
             StatCard(
                 label = stringResource(R.string.stat_humidity),
-                value = "${weatherData.humidity}%"
+                value = stringResource(R.string.format_humidity, weatherData.humidity)
             )
             StatCard(
                 label = stringResource(R.string.stat_wind),
-                value = "${weatherData.windSpeed} м/с"
+                value = stringResource(R.string.format_wind_speed, weatherData.windSpeed)
             )
         }
 

@@ -29,10 +29,19 @@
     <string name="action_details">Подробнее</string>
     <string name="action_back">← Назад</string>
 
+    <!-- Ring chart -->
+    <string name="ring_chart_hint">Нажмите на кольцо, чтобы увидеть процент</string>
+
+    <!-- Weather format strings -->
+    <string name="format_temperature">%d°C</string>
+    <string name="format_humidity">%d%%</string>
+    <string name="format_wind_speed">%.1f м/с</string>
+
     <!-- Onboarding -->
     <string name="onboarding_title">Weather App</string>
     <string name="onboarding_welcome">Добро пожаловать! Вот что умеет приложение:</string>
     <string name="onboarding_dismiss">Понятно!</string>
+    <string name="ring_chart_label">Кольцевая диаграмма</string>
     <string-array name="onboarding_features">
         <item>Получать текущую погоду по названию города</item>
         <item>Просматривать подробную информацию о погоде</item>

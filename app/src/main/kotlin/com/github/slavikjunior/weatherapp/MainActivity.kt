@@ -22,6 +22,7 @@ import androidx.navigation3.runtime.rememberNavBackStack
 import androidx.navigation3.ui.NavDisplay
 import com.github.slavikjunior.weatherapp.presentation.navigation.Route
 import com.github.slavikjunior.weatherapp.presentation.screen.onboarding.OnboardingBottomSheet
+import com.github.slavikjunior.weatherapp.presentation.screen.ringchart.RingChartScreen
 import com.github.slavikjunior.weatherapp.presentation.screen.weatherByCity.WeatherByCity
 import com.github.slavikjunior.weatherapp.presentation.screen.weatherDetail.WeatherDetail
 import com.github.slavikjunior.weatherapp.presentation.ui.theme.WeatherAppTheme
@@ -75,13 +76,20 @@ internal fun WeatherApp(paddingValues: PaddingValues = PaddingValues()) {
             entry<Route.WeatherByCityRoute> {
                 WeatherByCity(
                     paddingValues = paddingValues,
-                    onNavigateToDetail = { city -> backStack.add(Route.WeatherDetailRoute(city)) }
+                    onNavigateToDetail = { city -> backStack.add(Route.WeatherDetailRoute(city)) },
+                    onNavigateToRingChart = { backStack.add(Route.RingChartRoute) }
                 )
             }
             entry<Route.WeatherDetailRoute> { route ->
                 WeatherDetail(
                     paddingValues = paddingValues,
                     city = route.city,
+                    onBack = { backStack.removeLastOrNull() }
+                )
+            }
+            entry<Route.RingChartRoute> {
+                RingChartScreen(
+                    paddingValues = paddingValues,
                     onBack = { backStack.removeLastOrNull() }
                 )
             }

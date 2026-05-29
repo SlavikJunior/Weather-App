@@ -88,7 +88,9 @@ internal class WeatherByCityViewModel
                 }
                 _snackbarMessage.emit(messageRes)
             } catch (cause: Throwable) {
-                _uiState.update { WeatherByCityUiState.ErrorState(cause = cause, city = city) }
+                _uiState.update {
+                    WeatherByCityUiState.ErrorState(message = cause.message ?: "", city = city)
+                }
             }
         }
     }
